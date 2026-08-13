@@ -1,0 +1,124 @@
+@baseUrl = http://localhost:3001
+
+###############################################################################
+# 1. HAPPY PATH — fluxo completo de sucesso
+###############################################################################
+
+### GET /movies — lista todos os filmes
+GET {{baseUrl}}/movies
+
+### GET /movies/:id — busca um filme existente (ajuste o id conforme o seed)
+GET {{baseUrl}}/movies/1
+
+### POST /movies — cria um filme completo
+POST {{baseUrl}}/movies
+Content-Type: application/json
+
+{
+  "title": "Matrix",
+  "director": "Lana Wachowski",
+  "year": 1999,
+  "genre": "Ficção Científica",
+  "watched": true
+}
+
+### POST /movies — sem "watched" (deve assumir default false)
+POST {{baseUrl}}/movies
+Content-Type: application/json
+
+{
+  "title": "Clube da Luta",
+  "director": "David Fincher",
+  "year": 1999,
+  "genre": "Drama"
+}
+
+### PUT /movies/:id — atualiza um filme existente (ajuste o id)
+PUT {{baseUrl}}/movies/1
+Content-Type: application/json
+
+{
+  "title": "Cidade de Deus",
+  "director": "Fernando Meirelles",
+  "year": 2002,
+  "genre": "Drama",
+  "watched": false
+}
+
+### DELETE /movies/:id — remove um filme existente (ajuste o id)
+DELETE {{baseUrl}}/movies/2
+
+
+###############################################################################
+# 2. ERROS 400 — validação (Zod) deve barrar o request
+###############################################################################
+
+### POST /movies — body vazio
+POST {{baseUrl}}/movies
+Content-Type: application/json
+
+{}
+
+### POST /movies — "year" como string
+POST {{baseUrl}}/movies
+Content-Type: application/json
+
+{
+  "title": "Filme Teste",
+  "director": "Diretor Teste",
+  "year": "dois mil",
+  "genre": "Drama"
+}
+
+### POST /movies — "genre" numérico
+POST {{baseUrl}}/movies
+Content-Type: application/json
+
+{
+  "title": "Filme Teste",
+  "director": "Diretor Teste",
+  "year": 2020,
+  "genre": 123
+}
+
+### POST /movies — ano futuro
+POST {{baseUrl}}/movies
+Content-Type: application/json
+
+{
+  "title": "Filme Teste",
+  "director": "Diretor Teste",
+  "year": 2099,
+  "genre": "Drama"
+}
+
+### POST /movies — ano anterior a 1888 (invenção do cinema)
+POST {{baseUrl}}/movies
+Content-Type: application/json
+
+{
+  "title": "Filme Teste",
+  "director": "Diretor Teste",
+  "year": 1800,
+  "genre": "Drama"
+}
+
+
+###############################################################################
+# 3. NOT FOUND 404 — id inexistente
+###############################################################################
+
+### PUT /movies/9999 — id inexistente
+PUT {{baseUrl}}/movies/9999
+Content-Type: application/json
+
+{
+  "title": "Filme Teste",
+  "director": "Diretor Teste",
+  "year": 2020,
+  "genre": "Drama",
+  "watched": false
+}
+
+### DELETE /movies/9999 — id inexistente
+DELETE {{baseUrl}}/movies/9999
