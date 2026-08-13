@@ -11,11 +11,10 @@ arquivo direto no navegador, ou rode `pnpm dev` em `web/` e acesse
 ## Estrutura
 
 ```
-exercicios-10-pts/
+prova-01-api-front-bd-rpv/
 ├── database/     # schema.sql + seeds.sql (MySQL)
 ├── api/          # TypeScript + Express 5 + Knex 3 + Zod (porta 3001)
-├── web/          # Next.js 16 (Pages Router) + Tailwind v4 (porta 3000)
-└── gabarito/      # referência das partes com TODO (não use antes de tentar)
+└── web/          # Next.js 16 (Pages Router) + Tailwind v4 (porta 3000)
 ```
 
 ## Pré-requisitos
@@ -26,15 +25,18 @@ exercicios-10-pts/
 
 ## 1. Banco de dados
 
-Crie o banco e popule com os dados de exemplo:
+Crie o banco e popule com os dados de exemplo ( utilize os comandos apenas se estiver executando o banco via CLI ):
 
 ```bash
 mysql --default-character-set=utf8mb4 -u root -p < database/schema.sql
 mysql --default-character-set=utf8mb4 -u root -p < database/seeds.sql
 ```
-
 > A flag `--default-character-set=utf8mb4` evita problemas de acentuação
 > (ex: "Ficção" virar "FicÃ§Ã£o") ao importar os arquivos `.sql`.
+
+> Na pasta `database` você encontra os comandos necessários para executar via MySQL Workbench
+> Atenção na criação do banco , utilize utf8mb4.
+
 
 ## 2. API
 
