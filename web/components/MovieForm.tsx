@@ -1,3 +1,5 @@
+
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { z } from "zod";
@@ -64,6 +66,7 @@ export default function MovieForm({ onCreate }: MovieFormProps) {
           <p className="text-xs text-red-600">{errors.director.message}</p>
         )}
       </div>
+     
 
       {/*
         TODO (aluno): campo "year"
@@ -71,21 +74,65 @@ export default function MovieForm({ onCreate }: MovieFormProps) {
         - Use type="number" no <input>.
         - Registre com register('year', { valueAsNumber: true }) para que
           o RHF converta o valor do input (string) em number antes da
-          validação do Zod.
-        - Exiba errors.year?.message, se houver.
+          validação do Zod. 
+        - Exiba errors.year?.message, se houver.👌
       */}
+      <div className="flex flex-col gap-1">
+        <label htmlFor="director" className="text-sm font-medium text-gray-700">
+          Ano
+        </label>
+        <input
+          id="aluno"
+          type="text"
+          {...register('year', { valueAsNumber: true })}
+          className="rounded border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        {errors.director && (
+          <p className="text-xs text-red-600">{errors.year?.message}</p>
+        )}
+      </div>
 
       {/*
         TODO (aluno): campo "genre"
         - Siga o modelo dos campos "title"/"director" acima.
         - Exiba errors.genre?.message, se houver.
       */}
+       <div className="flex flex-col gap-1">
+        <label htmlFor="title" className="text-sm font-medium text-gray-700">
+          Gênero
+        </label>
+        <input
+          id="title"
+          type="text"
+          {...register("genre")}
+          className="rounded border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        {errors.title && (
+          <p className="text-xs text-red-600">{errors.genre?.message}</p>
+        )}
+      </div>
+
+      {/* director — MODELO: use este campo como referência para os TODOs abaixo */}
 
       {/*
         TODO (aluno): campo "watched"
         - Use um <input type="checkbox" {...register('watched')} />.
         - Adicione um <label> "Já assistido".
       */}
+      <div className="flex flex-col gap-1">
+        <label htmlFor="director" className="text-sm font-medium text-gray-700">
+          Já assistido
+        </label>
+        <input
+          id="watched"
+          type="checkbox"
+          {...register('watched')}
+          className="rounded border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue"
+        />
+        {errors.director && (
+          <p className="text-xs text-red-600">{errors.director.message}</p>
+        )}
+      </div>
 
       <button
         type="submit"
@@ -97,3 +144,4 @@ export default function MovieForm({ onCreate }: MovieFormProps) {
     </form>
   );
 }
+
